@@ -1,0 +1,34 @@
+<div class="row">
+    <div class="col-md-6">
+        <h3 *ngIf="!editMode">Post Add</h3>
+        <h3 *ngIf="editMode">Post Edit</h3>
+        <!-- post-form.component.html -->
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" formControlName="title" />
+
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" formControlName="description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="imagePath">Image Path</label>
+                <input type="text" class="form-control" id="imagePath" name="imagePath" formControlName="imagePath" />
+            </div>
+            <!--<div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" class="form-control" id="author" name="author">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" class="form-control" id="date" name="date">
+            </div>-->
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid" *ngIf="editMode">Update</button>
+            <button type="submit" class="btn btn-success" [disabled]="!form.valid" *ngIf="!editMode">Save</button>|
+            <button type="reset" class="btn btn-primary">Clear</button>
+        </form>
+    </div>
+    <div class="col-md-6">
+        <img src="{{form.value.imagePath}}">
+    </div>
+</div>
