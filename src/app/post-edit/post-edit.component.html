@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="authService.isLoggedIn">
     <div class="col-md-6">
         <h3 *ngIf="!editMode">Post Add</h3>
         <h3 *ngIf="editMode">Post Edit</h3>
@@ -31,4 +31,8 @@
     <div class="col-md-6">
         <img src="{{form.value.imagePath}}">
     </div>
+</div>
+<div class="error-container" *ngIf="!authService.isLoggedIn">
+    <h1 class="error-heading">Oops!</h1>
+    <p class="error-text">You must log in to view this page.</p>
 </div>

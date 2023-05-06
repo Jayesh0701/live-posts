@@ -3,8 +3,10 @@
 <img [src]="post?.imagePath ? post?.imagePath : '#'" class="img-responsive" />
 <p>Author Name: {{post?.author}}</p>
 <p>Date:{{post?.date | date}}</p>
-<button type="button" (click)="onLikePost()" class="btn btn-default btn-sm">
+<button *ngIf="authService.isLoggedIn" type="button" (click)="onLikePost()" class="btn btn-default btn-sm">
     <span class="glyphicon glyphicon-thumbs-up"></span> Like {{post?.numberOfLikes}}
 </button>
 <br/><br/>
-<button class="btn btn-success" (click)="onEdit()">Edit</button> | <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+<div *ngIf="authService.isLoggedIn">
+    <button class="btn btn-success" (click)="onEdit()">Edit</button> | <button class="btn btn-danger" (click)="onDelete()">Delete</button>
+    <div>

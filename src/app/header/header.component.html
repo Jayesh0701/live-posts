@@ -12,13 +12,14 @@
             <ul class="nav navbar-nav">
                 <li><a routerLink="/post-list">Home</a></li>
             </ul>
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" *ngIf="authService.isLoggedIn">
                 <li><a routerLink="/post-add">Add Post</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a style="cursor: pointer;" (click)="onSave()"><span class="glyphicon glyphicon-floppy-disk"></span> Save</a></li>
-                <li><a style="cursor: pointer;" (click)="onFetch()"><span class="glyphicon glyphicon-download-alt"></span> Fetch Data</a></li>
-                <li><a routerLink="/auth"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a style="cursor: pointer;" *ngIf="authService.isLoggedIn" (click)="onSave()"><span class="glyphicon glyphicon-floppy-disk"></span> Save All</a></li>
+                <li><a style="cursor: pointer;" *ngIf="authService.isLoggedIn" (click)="onFetch()"><span class="glyphicon glyphicon-download-alt"></span> Fetch Data</a></li>
+                <li *ngIf="!authService.isLoggedIn"><a style="cursor: pointer;" routerLink="/auth"><span class="glyphicon glyphicon-log-in"></span> Login/Sign-Up</a></li>
+                <li *ngIf="authService.isLoggedIn"><a style="cursor: pointer;" (click)="onLogOut()"><span class="glyphicon glyphicon-log-in"></span> Log-Out</a></li>
             </ul>
         </div>
     </div>

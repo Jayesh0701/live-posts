@@ -10,7 +10,7 @@
     },
     "private": true,
     "dependencies": {
-        "@angular/animations": "^15.2.0",
+        "@angular/animations": "^15.2.9",
         "@angular/common": "^15.2.0",
         "@angular/compiler": "^15.2.0",
         "@angular/core": "^15.2.0",
@@ -18,11 +18,11 @@
         "@angular/platform-browser": "^15.2.0",
         "@angular/platform-browser-dynamic": "^15.2.0",
         "@angular/router": "^15.2.0",
+        "ngx-toastr": "^16.2.0",
         "rxjs": "~7.8.0",
+        "sweetalert2": "^11.7.5",
         "tslib": "^2.3.0",
-        "zone.js": "~0.12.0",
-        "@ionic/angular": "^6.0.0",
-        "@angular/material": "^12.0.0"
+        "zone.js": "~0.12.0"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^15.2.6",

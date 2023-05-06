@@ -3,6 +3,7 @@ import { PostService } from '../post.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Post } from '../post.model';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-post-edit',
@@ -12,21 +13,30 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class PostEditComponent implements OnInit {
   //
   form!: FormGroup;
-  index: number=0;
-  editMode:boolean=false;
-  constructor(private postService: PostService,private router:Router, private route:ActivatedRoute) {}
+  index: number = 0;
+  editMode: boolean = false;
+  constructor(
+    private postService: PostService,
+    private router: Router,
+    private route: ActivatedRoute,
+    public authService:AuthenticationService
+  ) {
+    this.authService.loginEvent.subscribe((isLoggedIn: boolean) => {
+      this.authService.isLoggedIn = isLoggedIn;
+    });
+  }
   ngOnInit(): void {
     let title = '';
     let description = '';
     let imagePath = '';
-    this.route.params.subscribe((params:Params)=>{
-      if(params['index']){
-        this.index=params['index'];
-        const post=this.postService.getPost(this.index);
-        title=post.title;
-        description=post.description;
-        imagePath=post.imagePath;
-        this.editMode=true;
+    this.route.params.subscribe((params: Params) => {
+      if (params['index']) {
+        this.index = params['index'];
+        const post = this.postService.getPost(this.index);
+        title = post.title;
+        description = post.description;
+        imagePath = post.imagePath;
+        this.editMode = true;
       }
     });
     this.form = new FormGroup({
@@ -52,12 +62,11 @@ export class PostEditComponent implements OnInit {
       new Date(),
       0
     );
-    if(this.editMode){
-      this.postService.updatePost(this.index,post);
+    if (this.editMode) {
+      this.postService.updatePost(this.index, post);
+    } else {
+      this.postService.addPost(post);
     }
-    else{
-    this.postService.addPost(post);
-    }
-    this.router.navigate(["/post-list"]);
+    this.router.navigate(['/post-list']);
   }
 }

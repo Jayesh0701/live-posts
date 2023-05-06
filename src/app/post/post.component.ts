@@ -2,6 +2,7 @@ import { Component,Input,OnInit } from '@angular/core';
 import { Post } from '../post.model';
 import { PostService } from '../post.service';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-post',
@@ -11,8 +12,10 @@ import { Router } from '@angular/router';
 export class PostComponent implements OnInit {
 @Input() post? :Post;
 @Input() index:number=0;
-constructor(private postService:PostService,private router:Router){
-
+constructor(private postService:PostService,private router:Router,public authService:AuthenticationService){
+  this.authService.loginEvent.subscribe((isLoggedIn: boolean) => {
+    this.authService.isLoggedIn = isLoggedIn;
+  });
 }
 ngOnInit(): void {
   
